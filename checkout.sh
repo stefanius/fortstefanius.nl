@@ -1,1 +1,0 @@
-sudo git clone git://github.com/stefanius/fortstefanius.nl.git .
