@@ -1,0 +1,54 @@
+
+<div id="footer">
+<a href="/" id="toggleDebug" style="font-size:14px;">Debug <img src="/assets/img/icons/magnifier.png" class="icon" style="vertical-align:text-bottom;" /></a>
+<div id="debug" style="display:none;white-space:pre;text-align:left;font-family:monospace;font-size:12px;">
+<?php
+
+echo "Queries uitgevoerd:\n\n";
+
+$queries = Registry::getInstance()->DB->getQueries();
+
+print_r($queries);
+
+$time = $i = 0;
+
+foreach ($queries as $query) {
+    $time += sprintf("%0.8F", $query["sec"]);
+    $i++;
+}
+
+$end = microtime();
+$sql = sprintf("%0.8F", $time);
+$php = sprintf("%0.8F", $end - SCRIPT_START);
+$run = sprintf("%0.8F", $php + $sql);
+
+$percentage_sql = sprintf("%5.2F", ($sql / $run) * 100);
+$percentage_php = sprintf("%5.2F", ($php / $run) * 100);
+
+echo "\n";
+echo $i . " queries\n\n";
+echo $sql . " seconden sql ( " . $percentage_sql . "% )\n";
+echo $php . " seconden php ( " . $percentage_php . "% )\n";
+echo $run . " seconden server\n";
+echo "\n";
+echo "\n";
+echo "Backtrace:\n\n";
+echo debug_print_backtrace();
+echo "\n";
+
+?>
+</div>
+</div> 
+
+<script type="text/javascript">
+    window.addEvent('domready', function(){
+        $('toggleDebug').addEvent('click', function(e){
+            if (e) e.stop();
+            var target = $('debug');
+            target.style.display = (target.style.display == 'none' ? '' : 'none');
+        });
+    });
+</script>
+
+</body>
+</html>
