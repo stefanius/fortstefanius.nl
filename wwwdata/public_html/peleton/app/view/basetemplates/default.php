@@ -14,7 +14,9 @@
       }
     </style>
     <?php
-    
+    echo '<pre>';
+            print_r(get_defined_constants(true));
+             echo '</pre>';
         var_dump($SEO_Header_index);
         echo $Template->loadStylesheet('jquery-ui-1.9.1.custom.min.css', URL_CORE_CSS);
         echo $Template->loadStylesheet('bootstrap.css', URL_CORE_CSS);
