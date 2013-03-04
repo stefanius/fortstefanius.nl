@@ -415,6 +415,7 @@ class Template
     }
     
     public function loadJavascript($script, $location=URL_JS){
+        echo '<pre>'.URL_BASE.$location.$script.'</pre>';
         $styleString='<script src="'.URL_BASE.$location.$script.'"></script>';
         return $styleString;
     }    
